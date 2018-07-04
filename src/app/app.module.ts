@@ -1,3 +1,4 @@
+import { CardTvShowComponent } from './components/card-tv-show/card-tv-show.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +28,8 @@ import { CardMovieComponent } from './components/card-movie/card-movie.component
     AppComponent,
     SearchComponent,
     DetailsPersonComponent,
-    CardMovieComponent
+    CardMovieComponent, 
+    CardTvShowComponent
   ],
   imports: [
     BrowserModule,
