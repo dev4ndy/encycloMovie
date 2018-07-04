@@ -14,24 +14,43 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { DetailsPersonComponent } from './components/details-person/details-person.component';
+import { CardMovieComponent } from './components/card-movie/card-movie.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    DetailsPersonComponent
+    DetailsPersonComponent,
+    CardMovieComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule, MatIconModule, MatToolbarModule, MatInputModule, HttpClientModule, MatCardModule, MatDividerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgCircleProgressModule.forRoot({
+      "backgroundPadding": 7,
+      "radius": 18,
+      "space": -2,
+      "outerStrokeWidth": 2,
+      "outerStrokeColor": "#ff0000",
+      "innerStrokeColor": "#e7e8ea",
+      "innerStrokeWidth": 2,
+      "titleFontSize": "14",
+      "subtitleFontSize": "16",
+      "animation": false,
+      "animateTitle": false,
+      "showSubtitle": false,
+      "showUnits": true,
+      "showBackground": false
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
