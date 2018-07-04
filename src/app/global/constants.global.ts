@@ -12,4 +12,6 @@ export const constants = Object.freeze({
   DEFAULT_IMAGE_MOVIE: 'movie.png',
   DEFAULT_IMAGE_TV: 'tv.png',
   DEFAULT_IMAGE_PEOPLE: 'person.png',
+  GENDER_MALE: 2,
+  GENDER_FEMALE: 1,
 });

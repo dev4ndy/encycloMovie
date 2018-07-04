@@ -54,6 +54,10 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+    * Perform the search when the user finishes writing
+    * @param value 
+    */
   onKeyUp(value: string) {
     if (value.length <= 0) {
       this.list = [];
@@ -67,6 +71,27 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  /**
+   * Call a component depending on the media type
+   * @param item 
+   */
+  openDetails(item: any) {
+    let media_type = item.media_type;
+    switch (media_type) {
+      case constants.MEDIA_TYPE_PERSON:
+        this.state = 'inactive';
+        this.router.navigate([`/people/detail/${item.id}`]);
+        setTimeout(() => this.list = [], 700); // clear list before animations
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Returns the results of the search and adds a default image when they do not have
+   * @param value 
+   */
   getAll(value: string) {
     if (value) {
       this.movieService.getAll(value).subscribe(
@@ -102,10 +127,18 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  /**
+   * Place a background image securely
+   * @param item 
+   */
   getImg(item) {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${this.gobalService.getFullUrlImg(item, 'w185_and_h278_bestv2')})`);
   }
-
+  
+  /**
+   * returns the name depending on the media type
+   * @param item 
+   */
   getName(item) {
     return this.gobalService.getName(item);
   }

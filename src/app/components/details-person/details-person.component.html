@@ -1,0 +1,39 @@
+<div *ngIf="people" fxLayout="column" fxLayoutAlign="center center">
+  <div fxFlex="" fxFlexOffset="1%">
+    <mat-card fxLayout="row" class="mat-elevation-z10">
+      <div fxFlex="650px">
+        <img fxFlexOffset="1%" [src]="getImg()">
+        <div fxFlex="" fxFlexOffset="2%">
+          <div fxLayout="column">
+            <h1 fxFlexOffset="5">{{people.name}}</h1>
+            <p>
+              <strong>
+                Gender
+              </strong>
+              <br> {{people.gender}}
+            </p>
+            <p>
+              <strong>
+                Birthday
+              </strong>
+              <br> {{people.birthday}}
+            </p>
+            <p>
+              <strong>
+                Place of Birth
+              </strong>
+              <br> {{people.place_of_birth}}
+            </p>
+            <p>
+              <strong>
+                Official Site
+              </strong>
+              <br> {{ people.homepage }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <mat-divider fxFlexOffset="1%" style="width: 100%"></mat-divider>
+</div>
