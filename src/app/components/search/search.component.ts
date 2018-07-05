@@ -1,10 +1,12 @@
 import { constants } from './../../global/constants.global';
 import { GlobalService } from '../../services/global.service';
 import { MovieService } from '../../services/movie.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { trigger, state, transition, style, animate, query, animateChild } from '@angular/animations';
 import { Router } from "@angular/router";
+import { fromEvent, Observable, merge } from 'rxjs';
+import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -37,13 +39,15 @@ import { Router } from "@angular/router";
 export class SearchComponent implements OnInit {
 
   constants = constants;
-  elmResult: HTMLElement = document.getElementById('result');
-  txtSearch = '';
   doneTypingInterval = 500;
   typingTimer = null;
   list = [];
-  state = 'inactive';
+  state: string = 'inactive';
+  blResult: boolean = false;
+  blLengthText: boolean = false;
+  query: string = '';
 
+  @ViewChild('txtSearch') txtSearch: ElementRef;
   constructor(
     private movieService: MovieService,
     private sanitizer: DomSanitizer,
@@ -52,23 +56,31 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  }
-
-  /**
-    * Perform the search when the user finishes writing
-    * @param value 
-    */
-  onKeyUp(value: string) {
-    if (value.length <= 0) {
-      this.list = [];
-      this.state = 'inactive';
-    }
-    if (value.length > 2) {
-      clearTimeout(this.typingTimer);
-      this.typingTimer = setTimeout(() => {
-        this.getAll(value);
-      }, this.doneTypingInterval);
-    }
+    let evtKeyUp$ = fromEvent(this.txtSearch.nativeElement, 'keyup');
+    let AllEvents$ = merge(evtKeyUp$);
+    AllEvents$.pipe(
+      // get value
+      map((evt: any) => { this.query = evt.target.value; return evt.target.value }),
+      // text length must be > 2 chars
+      filter(res => {
+        if (res && res.length > 2) {
+          this.blLengthText = false;
+          return true;
+        } else {
+          this.list = [];
+          this.blLengthText = true;
+          return false;
+        }
+      }
+      ),
+      // emit after 1s of silence
+      debounceTime(1000),
+      // emit only if data changes since the last emit       
+      distinctUntilChanged()
+      // subscription
+    ).subscribe((text: string) => {
+      this.getAll(text);
+    });
   }
 
   /**
@@ -107,26 +119,33 @@ export class SearchComponent implements OnInit {
       this.movieService.getAll(value).subscribe(
         (result: any) => {
           let results = result.results;
-          for (let i = 0; i < results.length; i++) {
-            const item = results[i];
-            switch (item.media_type) {
-              case constants.MEDIA_TYPE_PERSON:
-                if (!item.profile_path) {
-                  results[i].profile_path = constants.DEFAULT_IMAGE_PEOPLE
-                }
-                break;
-              case constants.MEDIA_TYPE_TV:
-                if (!item.poster_path) {
-                  results[i].poster_path = constants.DEFAULT_IMAGE_TV
-                }
-                break;
-              case constants.MEDIA_TYPE_MOVIE:
-                if (!item.poster_path) {
-                  results[i].poster_path = constants.DEFAULT_IMAGE_MOVIE
-                }
-                break;
+          if (results.length != 0) {
+            this.blLengthText = false;
+            this.blResult = false;
+            for (let i = 0; i < results.length; i++) {
+              const item = results[i];
+              switch (item.media_type) {
+                case constants.MEDIA_TYPE_PERSON:
+                  if (!item.profile_path) {
+                    results[i].profile_path = constants.DEFAULT_IMAGE_PEOPLE
+                  }
+                  break;
+                case constants.MEDIA_TYPE_TV:
+                  if (!item.poster_path) {
+                    results[i].poster_path = constants.DEFAULT_IMAGE_TV
+                  }
+                  break;
+                case constants.MEDIA_TYPE_MOVIE:
+                  if (!item.poster_path) {
+                    results[i].poster_path = constants.DEFAULT_IMAGE_MOVIE
+                  }
+                  break;
+              }
             }
+          } else {
+            this.blResult = true;
           }
+
           this.list = this.orderByPopularity(result.results);
           this.state = 'active';
         },

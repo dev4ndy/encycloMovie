@@ -37,11 +37,11 @@ export class PeopleService {
   }
 
   /**
- * This method return a array of tv shows by person id. 
- * More info endpoint API: https://developers.themoviedb.org/3/people/get-person-tv-credits
- * @param id 
- * @param language 
- */
+   * This method return a array of tv shows by person id. 
+   * More info endpoint API: https://developers.themoviedb.org/3/people/get-person-tv-credits
+   * @param id 
+   * @param language 
+   */
   getTVShowsCredits(id: number, language: string = 'en_US'): Observable<Array<TvShow>> {
     let params = new HttpParams();
     let endPoint = `person/${id}/tv_credits`;
@@ -63,11 +63,11 @@ export class PeopleService {
   }
 
   /**
- * This method return a array of movie by person id. 
- * More info endpoint API: https://developers.themoviedb.org/3/people/get-person-movie-credits
- * @param id 
- * @param language 
- */
+   * This method return a array of movie by person id. 
+   * More info endpoint API: https://developers.themoviedb.org/3/people/get-person-movie-credits
+   * @param id 
+   * @param language 
+   */
   getMovieCredits(id: number, language: string = 'en_US'): Observable<Array<Movie>> {
     let params = new HttpParams();
     let endPoint = `person/${id}/movie_credits`;
@@ -87,5 +87,29 @@ export class PeopleService {
         })
       );
   }
+  /**
+   * Get the list of popular people on TMDb. This list updates daily. 
+   * More info endpoint API: https://developers.themoviedb.org/3/people/get-popular-people
+   * @param language 
+   */
+  getPopular(language: string = 'en_US'): Observable<Array<People>> {
+    let params = new HttpParams();
+    let endPoint = `person/popular`
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((people: any) => {
+        let lsPeople: Array<People> = [];
+        people.results.forEach(p => {         
+          lsPeople.push(new People(p as IPeople));
+        });
+        return lsPeople;
+      })
+    );
+  }
+
+
 
 }

@@ -161,4 +161,73 @@ export class MovieService {
     );
   }
 
+  /**
+   * Get a list of movies in theatres. This is a release type query that looks for all movies that have a release type of 2 or 3 within the specified date range.
+   * More info endpoint API: https://developers.themoviedb.org/3/movies/get-now-playing
+   * @param language 
+   */
+  getNowPlaying(language: string = 'en_US'): Observable<Array<Movie>> {
+    let params = new HttpParams();
+    let endPoint = `movie/now_playing`;
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((data: any) => {
+        let lsMovie: Array<Movie> = [];
+        data.results.forEach(movie => {
+          lsMovie.push(new Movie(movie as IMovie));
+        });
+        return lsMovie;
+      })
+    );
+  }
+
+  /**
+   * Get the top rated movies on TMDb.
+   * More info endpoint API: https://developers.themoviedb.org/3/movies/get-top-rated-movies
+   * @param language 
+   */
+  getTop(language: string = 'en_US'): Observable<Array<Movie>> {
+    let params = new HttpParams();
+    let endPoint = `movie/top_rated`;
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((data: any) => {
+        let lsMovie: Array<Movie> = [];
+        data.results.forEach(movie => {
+          lsMovie.push(new Movie(movie as IMovie));
+        });
+        return lsMovie;
+      })
+    );
+  }
+
+  /**
+   * Get a list of upcoming movies in theatres. This is a release type query that looks for all movies that have a release type of 2 or 3 within the specified date range.
+   * More info endpoint API: https://developers.themoviedb.org/3/movies/get-upcoming
+   * @param language 
+   */
+  getUpcoming(language: string = 'en_US'): Observable<Array<Movie>> {
+    let params = new HttpParams();
+    let endPoint = `movie/upcoming`;
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((data: any) => {
+        let lsMovie: Array<Movie> = [];
+        data.results.forEach(movie => {
+          lsMovie.push(new Movie(movie as IMovie));
+        });
+        return lsMovie;
+      })
+    );
+  }
+
 }

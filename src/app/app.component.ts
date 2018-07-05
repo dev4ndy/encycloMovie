@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  peopleId: number;
+
+  listenPerson(peopleId: number) {
+    this.peopleId = peopleId;
+  }
 }

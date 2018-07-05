@@ -1,14 +1,15 @@
 <mat-toolbar color="primary">
   <mat-icon>theaters</mat-icon>
-  <p>EncycloMovies</p> &nbsp;&nbsp;
+  <p><a routerLink="/" >EncycloMovies</a></p> &nbsp;&nbsp;
   <mat-form-field class="iSearch">
-    <input matInput type="text" (click)="onKeyUp($event.currentTarget.value)" (keyup)="onKeyUp($event.currentTarget.value)" placeholder="Search for movie or artors or tv series or tv shows"
-      value="">
+    <input matInput type="text" #txtSearch placeholder="Search for movies, actors or Tv Shows" value="">
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </mat-toolbar>
 <div [@resultState]="state" class="resultSearch">
   <div [@innerState]="state" fxLayout="row wrap">
+    <h1 *ngIf="blResult && query.length != 0 && !blLengthText">No search Result</h1>
+    <h1 *ngIf="blLengthText && query.length <= 2">Enter at least 3 characters to start the search</h1>
     <div *ngFor="let item of list" class="em-search-result">
       <a (click)="openDetails(item)" title="{{getName(item)}}">
         <div [style.background-image]="getImg(item)" alt="">

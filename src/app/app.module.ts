@@ -1,11 +1,8 @@
-import { DetailsTvComponent } from './components/details-tv/details-tv.component';
-import { CardPeopleComponent } from './components/card-people/card-people.component';
-import { CardTvShowComponent } from './components/card-tv-show/card-tv-show.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AppRoutingModule } from './app-routing.module';
 /**
  * Angular Material Modules
  */
@@ -24,13 +21,18 @@ import { MatChipsModule } from '@angular/material/chips';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
-import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { DetailsPersonComponent } from './components/details-person/details-person.component';
 import { CardMovieComponent } from './components/card-movie/card-movie.component';
 import { DetailsMovieComponent } from './components/details-movie/details-movie.component';
 import { DialogTrailerComponent } from './components/dialog-trailer/dialog-trailer.component';
+import { HomeComponent } from './components/home/home.component';
+import { DetailsTvComponent } from './components/details-tv/details-tv.component';
+import { CardPeopleComponent } from './components/card-people/card-people.component';
+import { CardTvShowComponent } from './components/card-tv-show/card-tv-show.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { DialogTrailerComponent } from './components/dialog-trailer/dialog-trail
     DetailsMovieComponent,
     DialogTrailerComponent,
     CardPeopleComponent,
-    DetailsTvComponent
+    DetailsTvComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
