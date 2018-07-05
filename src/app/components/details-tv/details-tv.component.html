@@ -1,0 +1,125 @@
+<div fxLayout="column" *ngIf="tv">
+  <div class="bg" [style.background-image]="getBackdrop()">
+    <div class="bg2">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div fxFlex="" fxFlexOffset="1%">
+          <mat-card fxLayout="row" class="mat-elevation-z10">
+            <div fxFlex="800px">
+              <img fxFlexOffset="1%" [src]="getImg()">
+              <div fxFlex="" fxFlexOffset="2%">
+                <div fxLayout="column">
+                  <h1 fxflexoffset="5" class="titleMovie">{{tv.name}}</h1>
+                  <span class="textGray">{{tv.first_air_date}} - {{ tv.last_air_date }}
+                    <a *ngIf="tv.videos.length != 0" (click)="openDialog()" href="javascript:void(0)"> ➤ Play Trailer</a>
+                  </span>
+                  <h3>Overiew</h3>
+                  <p class="overview">
+                    {{ (tv.overview.length>329) ? (tv.overview | slice:0:329)+'...':(tv.overview) }}
+                  </p>
+                  <div>
+                    <div fxLayout="row">
+                      <div fxLayout="column">
+                        <h4>In Production</h4>
+                        <p class="overview">
+                          {{tv.in_production ? 'Yes' : 'Finished'}}
+                        </p>
+                      </div>
+                      <div fxLayout="column">
+                        <h4>Number of season</h4>
+                        <p class="overview">
+                          {{tv.number_of_seasons}}
+                        </p>
+                      </div>
+                      <div fxLayout="column">
+                        <h4>Number of episodes</h4>
+                        <p class="overview">
+                          {{tv.number_of_episodes}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 *ngIf="creators">Creators</h3>
+                  <p> {{creators}}
+                  </p>
+                  <h3>Genres</h3>
+                  <mat-chip-list>
+                    <mat-chip selected color="accent" *ngFor="let genre of tv.genres">{{genre.name}}</mat-chip>
+                  </mat-chip-list>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider fxFlexOffset="1%"></mat-divider>
+  <div style="width: 100%">
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab [label]="TAB_CAST_CREW">
+        <div class="content">
+          <div fxLayout="row wrap" fxLayoutAlign="start stretch">
+            <h2 fxFlex="90%">Feactured Cast</h2>
+            <app-card-people fxFlexOffset="10px" *ngFor="let cast of feactureCast" [people]="cast">
+            </app-card-people>
+          </div>
+          <div fxLayout="row wrap" fxLayoutAlign="start stretch">
+            <h2 fxFlex="90%">Created By</h2>
+            <app-card-people fxFlexOffset="10px" *ngFor="let cast of tv.created_by" [people]="cast">
+            </app-card-people>
+          </div>
+          <div fxLayout="row wrap" fxLayoutAlign="start stretch">
+            <h2 fxFlex="90%" *ngIf="feactureCrew.length != 0">Feactured Crew</h2>
+            <app-card-people fxFlexOffset="10px" *ngFor="let crew of feactureCrew" [people]="crew">
+            </app-card-people>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="TAB_SEASONS">
+        <ng-template matTabContent>
+          <div fxLayout="column" fxLayoutAlign="space-around center">
+            <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+              <app-card-tv-show *ngFor="let season of seasons" [tvShow]="season">
+              </app-card-tv-show>
+            </div>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="TAB_RECOMMENDATION">
+        <ng-template matTabContent>
+          <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngIf="blRecommendation; then title else without"></div>
+            <ng-template #title>
+              <h2 fxFlex="80%">Top Recommendation</h2>
+            </ng-template>
+            <ng-template #without>
+              <h2 fxFlex="80%">No recommendations found</h2>
+            </ng-template>
+            <app-card-tv-show *ngFor="let tv of lsRecommendation" [tvShow]="tv">
+            </app-card-tv-show>
+          </div>
+          {{getTvRecommendation()}}
+          <!-- lazy load with tabs angular.material.io-->
+        </ng-template>
+      </mat-tab>
+      <mat-tab [label]="TAB_SIMILAR">
+        <ng-template matTabContent>
+          <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngIf="blSimilar; then title2 else without2"></div>
+            <ng-template #title2>
+              <h2 fxFlex="80%">Top Similar Tv Shows</h2>
+            </ng-template>
+            <ng-template #without2>
+              <h2 fxFlex="80%">No similar tv shows</h2>
+            </ng-template>
+            <app-card-tv-show *ngFor="let tv of lsSimilar" [tvShow]="tv">
+            </app-card-tv-show>
+          </div>
+          {{getTvSimilar()}}
+
+          <!-- lazy load with tabs angular.material.io-->
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { People } from './people.model';
 
 import { IPeople } from '../interfaces/ipeople.interface';
 import { ITvShow } from '../interfaces/itv-show.interface';
+import { Video } from './video.model';
 
 
 
@@ -27,7 +28,7 @@ export class TvShow {
     public cast: Array<People> = [];
     public crew: Array<People> = [];
     public created_by: Array<People> = [];
-
+    public videos: Array<Video> = [];
     public isSeason: boolean = false;
     public number_of_episodes: number = 0;
     public number_of_seasons: number = 0;

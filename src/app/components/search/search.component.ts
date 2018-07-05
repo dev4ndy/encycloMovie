@@ -88,6 +88,11 @@ export class SearchComponent implements OnInit {
         this.router.navigate([`/movie/detail/${item.id}`]);
         setTimeout(() => this.list = [], 700); // clear list before animations
         break;
+      case constants.MEDIA_TYPE_TV:
+        this.state = 'inactive';
+        this.router.navigate([`/tv/detail/${item.id}`]);
+        setTimeout(() => this.list = [], 700); // clear list before animations
+        break;
       default:
         break;
     }
