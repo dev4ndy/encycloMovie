@@ -4,7 +4,9 @@ import { TvShow } from './tv-show.model';
 import { Movie } from './movie.model';
 
 export class People {
+    
     public name: string;
+    public character: string;
     public biography: string;
     public birthday: Date;
     public deathday: Date;
