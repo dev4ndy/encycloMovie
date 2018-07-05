@@ -1,0 +1,16 @@
+<mat-card class="cardPeople mat-elevation-z10">
+  <mat-card-header>
+    <mat-card-title>
+      <strong>{{people.name}}</strong>
+    </mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="getImgCastCrew()">
+  <mat-card-content>
+    <p>
+      {{people.character}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="btnInformation" routerLink="/people/detail/{{people.id}}" mat-button color="primary">More Information</button>
+  </mat-card-actions>
+</mat-card>

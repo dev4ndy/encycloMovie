@@ -1,6 +1,8 @@
 import { constants } from './../global/constants.global';
 import { DatePipe } from "@angular/common";
 import { IMovie } from "../interfaces/imovie.interface";
+import { People } from './people.model';
+import { Video } from './video.model';
 
 
 export class Movie {
@@ -16,6 +18,9 @@ export class Movie {
     public genre_ids: Array<number> = [];
     public original_language: string = '';
     public media_type: string = 'movie';
+    public cast: Array<People> = [];
+    public crew: Array<People> = [];
+    public videos: Array<Video> = [];
 
     constructor(iMovie: IMovie) {
         let pipe = new DatePipe('en-US');

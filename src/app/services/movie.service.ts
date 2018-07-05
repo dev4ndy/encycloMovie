@@ -5,6 +5,10 @@ import { Observable } from 'rxjs';
 import { Movie } from '../models/movie.model';
 import { map } from 'rxjs/operators';
 import { IMovie } from '../interfaces/imovie.interface';
+import { People } from '../models/people.model';
+import { IPeople } from '../interfaces/ipeople.interface';
+import { Video } from '../models/video.model';
+import { IVideo } from '../interfaces/ivideo.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +35,130 @@ export class MovieService {
     params = params.append('include_adult', String(page));
 
     return this.httpClient.get(url, { params: params });
+  }
+
+  /**
+    * This method return a movie by id
+    * @param id 
+    * @param language 
+  */
+  getById(id: number, language: string = 'en_US'): Observable<Movie> {
+    let params = new HttpParams();
+    let endPoint = `movie/${id}`
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((movie: IMovie) => {
+        return new Movie(movie as IMovie);
+      })
+    );
+  }
+
+  /**
+   * This method return a array of people by movie id. 
+   * More info endpoint API: https://developers.themoviedb.org/3/movies/get-movie-credits
+   * @param id 
+   * @param language 
+   */
+  getPeopleCredits(id: number, language: string = 'en_US'): Observable<Object> {
+    let params = new HttpParams();
+    let endPoint = `movie/${id}/credits`;
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params })
+      .pipe(
+        map((data: any) => {
+          let lsCast: Array<People> = [];
+          let lsCrew: Array<People> = [];
+
+          data.cast.forEach(cast => {
+            lsCast.push(new People(cast as IPeople));
+          });
+          data.crew.forEach(crew => {
+            lsCrew.push(new People(crew as IPeople));
+          });
+          return {
+            cast: lsCast,
+            crew: lsCrew
+          };
+        })
+      );
+  }
+
+  /**
+   * Get a list of recommended movies for a movie.
+   * More info endpoint API: https://developers.themoviedb.org/3/movies/get-movie-recommendations
+   * @param id 
+   * @param language 
+   */
+  getRecommendation(id: number, language: string = 'en_US'): Observable<Array<Movie>> {
+    let params = new HttpParams();
+    let endPoint = `movie/${id}/recommendations`;
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((data: any) => {
+        let lsMovie: Array<Movie> = [];
+        data.results.forEach(movie => {
+          lsMovie.push(new Movie(movie as IMovie));
+        });
+        return lsMovie;
+      })
+    );
+  }
+
+  /**
+   * Get a list of similar movies.
+   * More info endpoint API: https://developers.themoviedb.org/3/movies/get-similar-movies
+   * @param id 
+   * @param language 
+   */
+  getSimilar(id: number, language: string = 'en_US'): Observable<Array<Movie>> {
+    let params = new HttpParams();
+    let endPoint = `movie/${id}/similar`;
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((data: any) => {
+        let lsMovie: Array<Movie> = [];
+        data.results.forEach(movie => {
+          lsMovie.push(new Movie(movie as IMovie));
+        });
+        return lsMovie;
+      })
+    );
+  }
+
+  /**
+   * Get the videos that have been added to a movie.
+   * More info endpoint API: https://developers.themoviedb.org/3/movies/get-movie-videos
+   * @param id 
+   * @param language 
+   */
+  getVideos(id: number, language: string = 'en_US'): Observable<Array<Video>> {
+    let params = new HttpParams();
+    let endPoint = `movie/${id}/videos`;
+    let url = `${constants.BASE_URL}${endPoint}`;
+    params = params.append('api_key', constants.API_KEY);
+    params = params.append('language', language);
+
+    return this.httpClient.get(url, { params: params }).pipe(
+      map((data: any) => {
+        let lsMovie: Array<Video> = [];
+        data.results.forEach(video => {
+          lsMovie.push(new Video(video as IVideo));
+        });
+        return lsMovie;
+      })
+    );
   }
 
 }

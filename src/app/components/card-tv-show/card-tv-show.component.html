@@ -1,0 +1,14 @@
+<div class="container-tvShow-card mat-elevation-z8" fxLayout="row">
+  <img [src]="getImg()">
+  <div class="infoTvShow" fxFlex="">
+    <div fxLayout="column">
+      <circle-progress *ngIf="!tvShow.isSeason" [percent]="tvShow.vote_average * 10"></circle-progress>
+      <a class="title result" [title]="tvShow.name">{{tvShow.name}}</a>
+      <span>{{tvShow.first_air_date}}</span>
+      <p class="overview">{{(tvShow.overview.length>161) ? (tvShow.overview | slice:0:161)+'...':(tvShow.overview)}}</p>
+      <p *ngIf="!tvShow.isSeason" class="view_more">
+        <a class="result" routerLink="/tv/detail/{{tvShow.id}}" [title]="tvShow.name">More information</a>
+      </p>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 <div [@resultState]="state" class="resultSearch">
   <div [@innerState]="state" fxLayout="row wrap">
     <div *ngFor="let item of list" class="em-search-result">
-      <a title="{{getName(item)}}">
+      <a (click)="openDetails(item)" title="{{getName(item)}}">
         <div [style.background-image]="getImg(item)" alt="">
         </div>
         <span data-aliases="[]">{{getName(item)}}</span>
