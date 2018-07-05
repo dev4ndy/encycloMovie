@@ -5,6 +5,7 @@ import { Movie } from './movie.model';
 
 export class People {
     public name: string;
+    public character: string;
     public biography: string;
     public birthday: Date;
     public deathday: Date;
@@ -19,7 +20,7 @@ export class People {
     public department: string
     public tvShows: Array<TvShow> = [];
     public movies: Array<Movie> = [];
- 
+
 
     public constructor(iPeople: IPeople) {
         Object.keys(iPeople).forEach((key) => {

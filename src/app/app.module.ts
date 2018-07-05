@@ -1,3 +1,4 @@
+import { CardPeopleComponent } from './components/card-people/card-people.component';
 import { CardTvShowComponent } from './components/card-tv-show/card-tv-show.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -38,7 +39,8 @@ import { DialogTrailerComponent } from './components/dialog-trailer/dialog-trail
     CardMovieComponent, 
     CardTvShowComponent,
     DetailsMovieComponent,
-    DialogTrailerComponent
+    DialogTrailerComponent,
+    CardPeopleComponent
   ],
   imports: [
     BrowserModule,

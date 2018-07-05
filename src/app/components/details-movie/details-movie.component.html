@@ -38,14 +38,13 @@
         <div class="content">
           <div fxLayout="row wrap" fxLayoutAlign="start stretch">
             <h2 fxFlex="90%">Feactured Cast</h2>
-            <div>
-              <!--card people-->
-
-            </div>
+            <app-card-people fxFlexOffset="10px" *ngFor="let cast of feactureCast" [people]="cast">
+            </app-card-people>
           </div>
           <div fxLayout="row wrap" fxLayoutAlign="start stretch">
             <h2 fxFlex="90%" *ngIf="lsCrew.length != 0">Feactured Crew</h2>
-            <!--card people-->
+            <app-card-people fxFlexOffset="10px" *ngFor="let crew of lsCrew" [people]="crew">
+            </app-card-people>
           </div>
         </div>
       </mat-tab>
