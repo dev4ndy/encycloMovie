@@ -83,6 +83,11 @@ export class SearchComponent implements OnInit {
         this.router.navigate([`/people/detail/${item.id}`]);
         setTimeout(() => this.list = [], 700); // clear list before animations
         break;
+      case constants.MEDIA_TYPE_MOVIE:
+        this.state = 'inactive';
+        this.router.navigate([`/movie/detail/${item.id}`]);
+        setTimeout(() => this.list = [], 700); // clear list before animations
+        break;
       default:
         break;
     }
@@ -134,7 +139,7 @@ export class SearchComponent implements OnInit {
   getImg(item) {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${this.gobalService.getFullUrlImg(item, 'w185_and_h278_bestv2')})`);
   }
-  
+
   /**
    * returns the name depending on the media type
    * @param item 

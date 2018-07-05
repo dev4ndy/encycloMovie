@@ -1,0 +1,47 @@
+.bg {
+    background-size: cover;
+    height: 517px;
+}
+
+.bg2 {
+    height: 517px;
+    background-image: radial-gradient(circle at 20% 50%, rgba(105, 102, 100, 0.88) 0%, rgba(105, 102, 100, 0.88) 100%);
+}
+
+mat-card {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.titleMovie {
+    margin-top: 0px;
+    margin-bottom: 1px;
+}
+
+.textGray {
+    opacity: 0.6;
+    font-size: 1.2em;
+    font-weight: 400;
+    color: #807878;
+}
+
+h3 {
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.overview {
+    margin-top: 1px;
+}
+
+mat-divider {
+    width: 100%;
+}
+
+.content {
+    margin: 1%;
+}
+
+
+app-card-movie {
+    margin-top: 10px;
+}

@@ -16,6 +16,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -25,6 +27,8 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { DetailsPersonComponent } from './components/details-person/details-person.component';
 import { CardMovieComponent } from './components/card-movie/card-movie.component';
+import { DetailsMovieComponent } from './components/details-movie/details-movie.component';
+import { DialogTrailerComponent } from './components/dialog-trailer/dialog-trailer.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +36,16 @@ import { CardMovieComponent } from './components/card-movie/card-movie.component
     SearchComponent,
     DetailsPersonComponent,
     CardMovieComponent, 
-    CardTvShowComponent
+    CardTvShowComponent,
+    DetailsMovieComponent,
+    DialogTrailerComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule, MatIconModule, MatToolbarModule, MatInputModule, HttpClientModule, MatCardModule, MatDividerModule, MatTabsModule, MatSelectModule, MatButtonModule,
+    BrowserAnimationsModule, MatIconModule, MatToolbarModule, MatInputModule, HttpClientModule, MatCardModule, MatDividerModule, MatTabsModule, MatSelectModule, MatButtonModule, MatChipsModule, MatDialogModule,
     FlexLayoutModule,
     NgCircleProgressModule.forRoot({
       "backgroundPadding": 7,
@@ -59,6 +65,7 @@ import { CardMovieComponent } from './components/card-movie/card-movie.component
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogTrailerComponent]
 })
 export class AppModule { }

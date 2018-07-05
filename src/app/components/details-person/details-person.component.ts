@@ -44,7 +44,7 @@ export class DetailsPersonComponent implements OnInit, OnDestroy {
   public blTvShows: boolean = true;
   public blMovie: boolean = true;
 
-  navigationSubscription;
+  navigationSubscription; 
 
   public tabSelect: string = this.TAB_BIOGRAPHY;
   constructor(

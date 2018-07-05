@@ -14,4 +14,6 @@ export const constants = Object.freeze({
   DEFAULT_IMAGE_PEOPLE: 'person.png',
   GENDER_MALE: 2,
   GENDER_FEMALE: 1,
+  FEACTURE_CREW_JOBS: ['Director', 'Screenplay', 'Writer'],
+  VIDEO_TYPE_TRAILER: 'Trailer',
 });
