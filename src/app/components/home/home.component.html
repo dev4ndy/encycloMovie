@@ -1,0 +1,56 @@
+<div style="width: 100%">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab [label]="TAB_MOVIES">
+      <div fxLayout="column" fxLayoutAlign="space-around start">
+        <h1>Now Playing Movies</h1>
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+          <app-card-movie *ngFor="let movie of nowMovies" [movie]="movie">
+          </app-card-movie>
+        </div>
+        <h1>Top Rated Movies</h1>
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+          <app-card-movie *ngFor="let movie2 of topMovies" [movie]="movie2">
+          </app-card-movie>
+        </div>
+        <h1>Upcoming Movies</h1>
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+          <app-card-movie *ngFor="let movie3 of upcomingMovies" [movie]="movie3">
+          </app-card-movie>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="TAB_TVSHOW">
+      <ng-template matTabContent>
+        <div fxLayout="column" fxLayoutAlign="space-around start">
+          <h1>Popular Tv Shows</h1>
+          <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <app-card-tv-show *ngFor="let tv of popularTv" [tvShow]="tv">
+            </app-card-tv-show>
+          </div>
+          <h1>Top Rated Tv Shows</h1>
+          <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <app-card-tv-show *ngFor="let tv1 of topTv" [tvShow]="tv1">
+            </app-card-tv-show>
+          </div>
+        </div>
+        <!-- lazy load with tabs angular.material.io-->
+        {{getPopularTv()}} {{getTopTv()}}
+      </ng-template>
+    </mat-tab>
+    <mat-tab [label]="TAB_PEOPLE">
+      <ng-template matTabContent>
+        <div fxLayout="column" fxLayoutAlign="space-around start">
+          <h1>Popular People</h1>
+          <div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
+
+            <app-card-people *ngFor="let people of popularPeople" [people]="people">
+            </app-card-people>
+
+          </div>
+        </div>
+        <!-- lazy load with tabs angular.material.io-->
+        {{getPopularPeople()}}
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
