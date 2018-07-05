@@ -1,0 +1,19 @@
+.cardPeople {
+    width: 138px !important;
+    height: 87%;
+}
+
+
+mat-card-actions, button {
+    width: 100%
+}
+
+mat-card-title {
+    font-size: 18px;
+}
+
+.btnInformation {
+    bottom: 0px;
+    position: absolute;
+    margin: 0px -24px 0px -8px !important;
+}
