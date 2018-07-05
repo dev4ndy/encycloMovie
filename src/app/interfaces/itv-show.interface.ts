@@ -1,4 +1,6 @@
 import { People } from "../models/people.model";
+import { Genre } from "../models/genre.model";
+import { Season } from "../models/season.model";
 
 export interface ITvShow {
     id?: number,
@@ -21,5 +23,7 @@ export interface ITvShow {
     in_production?: boolean,
     last_air_date?: string,
     number_of_episodes?: number,
-    number_of_seasons?: number
+    number_of_seasons?: number,
+    seasons?: Array<Season>,
+    genres?: Array<Genre>,
 }

@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DetailsPersonComponent } from './components/details-person/details-person.component';
 import { DetailsMovieComponent } from './components/details-movie/details-movie.component';
+import { DetailsTvComponent } from './components/details-tv/details-tv.component';
 
 const routes: Routes = [
   { path: 'people/detail/:id', component: DetailsPersonComponent, runGuardsAndResolvers: 'always' },
   { path: 'movie/detail/:id', component: DetailsMovieComponent, runGuardsAndResolvers: 'always' },
+  { path: 'tv/detail/:id', component: DetailsTvComponent, runGuardsAndResolvers: 'always' }
 ];
 
 @NgModule({

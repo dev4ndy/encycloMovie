@@ -1,0 +1,73 @@
+.bg {
+    background-size: cover;
+    height: 528px;
+}
+
+.bg2 {
+    height: 528px;
+    background-image: radial-gradient(circle at 20% 50%, rgba(105, 102, 100, 0.88) 0%, rgba(105, 102, 100, 0.88) 100%);
+}
+
+mat-card {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.titleMovie {
+    margin-top: 0px;
+    margin-bottom: 1px;
+}
+
+.textGray {
+    opacity: 0.6;
+    font-size: 1.2em;
+    font-weight: 400;
+    color: #807878;
+}
+
+h3 {
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.overview {
+    margin-top: 1px;
+}
+
+mat-divider {
+    width: 100%;
+}
+
+.cardPeople {
+    width: 138px !important;
+    height: auto;
+}
+
+.content {
+    margin: 1%;
+}
+
+mat-card-actions, button {
+    width: 100%
+}
+
+mat-card-title {
+    font-size: 18px;
+}
+
+.btnInformation {
+    bottom: 0px;
+    position: absolute;
+    margin: 0px -24px 0px -8px !important;
+}
+
+app-card-movie {
+    margin-top: 10px;
+}
+
+app-card-tv-show {
+    margin-top: 10px;
+}
+
+h4{
+    margin: 3px;
+}
