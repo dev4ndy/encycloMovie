@@ -13,6 +13,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -33,9 +36,10 @@ import { CardMovieComponent } from './components/card-movie/card-movie.component
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule, MatIconModule, MatToolbarModule, MatInputModule, HttpClientModule, MatCardModule, MatDividerModule,
+    BrowserAnimationsModule, MatIconModule, MatToolbarModule, MatInputModule, HttpClientModule, MatCardModule, MatDividerModule, MatTabsModule, MatSelectModule, MatButtonModule,
     FlexLayoutModule,
     NgCircleProgressModule.forRoot({
       "backgroundPadding": 7,

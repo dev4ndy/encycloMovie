@@ -62,4 +62,40 @@ export class GlobalService {
       return item.title;
     }
   }
+
+  /**
+    * This method orders a list by vote average
+    * @param ls 
+    * @param sort Value: 1 when it is from highest to lowest. Value: 0 when it is from lowest to highes
+    */
+  orderByVote(ls: Array<any>, sort: number = 1) {
+    return ls.sort((a, b) => {
+      if (sort == 1) {
+        return b.vote_average - a.vote_average;
+      } else if (sort == 0) {
+        return a.vote_average - b.vote_average;
+      }
+    });
+  }
+
+  /**
+   * This method orders a list by date
+   * @param ls 
+   * @param sort Value: 1 when it is from highest to lowest. Value: 0 when it is from lowest to highes
+   */
+  orderListByDate(ls: Array<any>, sort: number = 1) {
+    return ls.sort((a, b) => {
+      let dateB = b.hasOwnProperty('release_date') ? new Date(b.release_date) : new Date(b.first_air_date);
+      let dateA = a.hasOwnProperty('release_date') ? new Date(a.release_date) : new Date(a.first_air_date);
+      if (sort == 1) {
+        if (dateA > dateB) return -1;
+        if (dateA < dateB) return 1;
+        return 0;
+      } else if (sort == 0) {
+        if (dateA > dateB) return 1;
+        if (dateA < dateB) return -1;
+        return 0;
+      }
+    });
+  }
 }

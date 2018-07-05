@@ -1,5 +1,7 @@
 import { IPeople } from './../interfaces/ipeople.interface';
 import { constants } from './../global/constants.global';
+import { TvShow } from './tv-show.model';
+import { Movie } from './movie.model';
 
 export class People {
     public name: string;
@@ -15,6 +17,9 @@ export class People {
     public media_type: string = 'person';
     public job: string;
     public department: string
+    public tvShows: Array<TvShow> = [];
+    public movies: Array<Movie> = [];
+ 
 
     public constructor(iPeople: IPeople) {
         Object.keys(iPeople).forEach((key) => {
